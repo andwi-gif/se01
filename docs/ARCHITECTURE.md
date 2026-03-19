@@ -234,8 +234,8 @@ artifacts/
         │   └── <task_id>__<mode>__<sdk_version>.json
         ├── summaries/
         │   ├── run_summary.json
-        │   ├── metrics_by_mode.csv
-        │   └── metrics_by_version.csv
+        │   ├── metrics_by_dimension.json
+        │   └── drift_classifications.json
         ├── logs/
         │   ├── pipeline.log
         │   └── environment.log
@@ -337,12 +337,13 @@ Suggested fields:
 
 Representative labels for the MVP taxonomy:
 - `no_drift_success`
+- `execution_timeout`
+- `environment_issue`
 - `syntax_or_format_error`
+- `module_path_change`
 - `missing_symbol`
 - `signature_change`
-- `module_path_change`
 - `semantic_runtime_change`
-- `environment_issue`
 - `unknown_failure`
 
 Purpose:

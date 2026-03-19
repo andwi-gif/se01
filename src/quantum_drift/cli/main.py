@@ -13,6 +13,7 @@ from quantum_drift.datasets import (
     load_model_response_fixtures,
     load_tasks,
 )
+from quantum_drift.evaluation import load_evaluation_inputs, run_evaluation_pipeline
 from quantum_drift.execution import (
     load_execution_inputs,
     load_runtime_manifest,
@@ -55,6 +56,12 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=None,
         help="Execute persisted offline generation artifacts for a TOML config.",
+    )
+    parser.add_argument(
+        "--evaluate-offline",
+        type=Path,
+        default=None,
+        help="Classify persisted execution artifacts and write run metrics for a TOML config.",
     )
     parser.add_argument(
         "--run-id",
@@ -123,6 +130,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"Executed offline run: {execution_run.run_id}")
         print(f"Execution results: {len(execution_run.results)}")
         print(f"Artifacts written to: {execution_run.output_dir}")
+
+    if args.evaluate_offline is not None:
+        loaded_evaluation = load_evaluation_inputs(
+            args.evaluate_offline,
+            repo_root=project_paths.repo_root,
+            run_id=args.run_id,
+        )
+        evaluation_run = run_evaluation_pipeline(loaded_evaluation)
+        print(f"Evaluated offline run: {evaluation_run.run_id}")
+        print(f"Drift classifications: {len(evaluation_run.summary.classifications)}")
+        print(f"Metric rows: {len(evaluation_run.summary.metrics)}")
+        print(f"Artifacts written to: {evaluation_run.output_dir}")
     return 0
 
 

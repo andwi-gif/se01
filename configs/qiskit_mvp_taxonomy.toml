@@ -1,0 +1,112 @@
+default_label = "unknown_failure"
+
+[labels.no_drift_success]
+severity = "none"
+is_recoverable = false
+description = "Candidate executed successfully for the target Qiskit version."
+
+[labels.execution_timeout]
+severity = "high"
+is_recoverable = true
+description = "Candidate did not finish before the offline execution timeout."
+
+[labels.environment_issue]
+severity = "high"
+is_recoverable = true
+description = "The execution harness or runtime environment failed before normal program completion."
+
+[labels.syntax_or_format_error]
+severity = "medium"
+is_recoverable = true
+description = "Python syntax or formatting prevented the candidate from running."
+
+[labels.module_path_change]
+severity = "high"
+is_recoverable = true
+description = "An import path or module location changed across SDK versions."
+
+[labels.missing_symbol]
+severity = "high"
+is_recoverable = true
+description = "Generated code referenced a missing symbol, attribute, or importable name."
+
+[labels.signature_change]
+severity = "medium"
+is_recoverable = true
+description = "A callable was found, but its accepted arguments changed."
+
+[labels.semantic_runtime_change]
+severity = "medium"
+is_recoverable = true
+description = "Execution reached runtime semantics but failed for version-sensitive behavior."
+
+[labels.unknown_failure]
+severity = "medium"
+is_recoverable = true
+description = "Execution failed and did not match a more specific MVP rule."
+
+[[rules]]
+label = "no_drift_success"
+statuses = ["success"]
+reason = "Execution completed successfully with exit code 0."
+
+[[rules]]
+label = "execution_timeout"
+statuses = ["timeout"]
+timed_out = true
+reason = "Execution exceeded the configured timeout budget."
+
+[[rules]]
+label = "environment_issue"
+statuses = ["runner_error"]
+reason = "The offline runner failed before the candidate completed."
+
+[[rules]]
+label = "syntax_or_format_error"
+statuses = ["runtime_error"]
+exception_types = ["SyntaxError", "IndentationError", "TabError"]
+reason = "Python could not parse or format the generated candidate."
+
+[[rules]]
+label = "module_path_change"
+statuses = ["runtime_error"]
+exception_types = ["ModuleNotFoundError"]
+reason = "An import path or module reference was not available in the target runtime."
+
+[[rules]]
+label = "module_path_change"
+statuses = ["runtime_error"]
+exception_types = ["ImportError"]
+exception_message_contains = ["No module named"]
+reason = "An import path or module reference was not available in the target runtime."
+
+[[rules]]
+label = "missing_symbol"
+statuses = ["runtime_error"]
+exception_types = ["ImportError"]
+exception_message_contains = ["cannot import name"]
+reason = "A referenced SDK symbol could not be imported from the target runtime."
+
+[[rules]]
+label = "missing_symbol"
+statuses = ["runtime_error"]
+exception_types = ["AttributeError", "NameError"]
+reason = "Generated code referenced an attribute or symbol that is unavailable in the target runtime."
+
+[[rules]]
+label = "signature_change"
+statuses = ["runtime_error"]
+exception_types = ["TypeError"]
+exception_message_contains = ["unexpected keyword argument", "positional argument", "required positional argument", "takes ", "got an unexpected keyword"]
+reason = "A callable resolved, but the target runtime rejected the provided signature."
+
+[[rules]]
+label = "semantic_runtime_change"
+statuses = ["runtime_error"]
+exception_types = ["ValueError", "AssertionError", "RuntimeError", "NotImplementedError"]
+reason = "Execution reached runtime semantics but failed with behavior-level incompatibility."
+
+[[rules]]
+label = "unknown_failure"
+statuses = ["runtime_error"]
+reason = "Execution failed without matching a more specific MVP drift rule."
