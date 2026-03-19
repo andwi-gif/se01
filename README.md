@@ -62,6 +62,7 @@ ruff check .
 mypy src
 pytest
 quantum-drift --validate-config sample_data/configs/offline_smoke.toml
+quantum-drift --generate-offline sample_data/configs/offline_smoke.toml --run-id readme-smoke
 ```
 
 ## Offline sample workflow
@@ -85,6 +86,29 @@ quantum-drift --validate-config sample_data/configs/offline_pilot.toml
 ```
 
 The command loads the TOML run config, task dataset, all versioned documentation excerpts, and the saved-response fixtures, then verifies the cross-references between them.
+
+### Offline generation slice
+
+Milestone 3 now includes a deterministic offline generation slice for the Qiskit MVP. The pipeline loads the checked-in tasks, docs, and saved-response fixtures; constructs prompts for `vanilla`, `rag_docs`, and `rewrite`; and writes structured generation artifacts under `artifacts/runs/<run_id>/`.
+
+Run the small smoke workflow locally with checked-in sample data only:
+
+```bash
+quantum-drift --generate-offline sample_data/configs/offline_smoke.toml --run-id offline-smoke-demo
+```
+
+This command writes:
+
+- `artifacts/runs/offline-smoke-demo/generation_results.json`: manifest of all generated results for the run.
+- `artifacts/runs/offline-smoke-demo/<task_id>/<sdk_version>/<mode>/prompt.txt`: the assembled prompt used for that deterministic request.
+- `artifacts/runs/offline-smoke-demo/<task_id>/<sdk_version>/<mode>/generated_code.py`: the saved-response output code.
+- `artifacts/runs/offline-smoke-demo/<task_id>/<sdk_version>/<mode>/result.json`: the structured `GenerationResult` artifact.
+
+Current limitations for this slice:
+
+- The only required backend is the checked-in saved-response backend; no live model or API-key flow is included yet.
+- `rag_docs` uses deterministic local excerpt selection from `sample_data/docs/`; it does not yet implement embeddings or semantic search.
+- `rewrite` is represented as an orchestration hook that rewrites from the vanilla baseline prompt path, but execution, drift classification, metrics, and dashboard features remain out of scope for this PR.
 
 ## Planning docs
 
