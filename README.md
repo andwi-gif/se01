@@ -4,7 +4,7 @@ This repository is the planning and implementation space for a reproducible Pyth
 
 ## Current scaffold
 
-The repository now includes the offline Qiskit MVP through Milestone 5: checked-in sample inputs, deterministic generation, fixture-backed execution, drift taxonomy evaluation, aggregate metrics, and CLI commands for the full offline sample workflow.
+The repository now includes the offline Qiskit MVP through the first usable slice of Milestone 7: checked-in sample inputs, deterministic generation, fixture-backed execution, drift taxonomy evaluation, aggregate metrics, CLI commands for the full offline sample workflow, and a minimal local dashboard for inspecting saved run artifacts.
 
 ### Repository layout
 
@@ -130,6 +130,30 @@ The evaluation step writes:
 - `artifacts/runs/offline-smoke-demo/run_summary.json`: top-level `RunSummary` artifact for the completed run.
 - `artifacts/runs/offline-smoke-demo/<task_id>/<sdk_version>/<mode>/drift_classification.json`: the per-attempt drift label saved beside the execution artifact.
 
+### Local dashboard
+
+Milestone 7 now includes a lightweight local dashboard implemented with Python standard-library WSGI tooling, so the MVP stays fully offline and adds no hosted-service dependency. The dashboard reads existing files from `artifacts/runs/<run_id>/`; it does not recompute metrics.
+
+Launch the dashboard after generating, executing, and evaluating a run:
+
+```bash
+quantum-drift --dashboard-run artifacts/runs/offline-smoke-demo
+```
+
+Useful options:
+
+```bash
+quantum-drift --dashboard-run artifacts/runs/offline-smoke-demo --dashboard-host 127.0.0.1 --dashboard-port 8000
+quantum-drift --dashboard-run artifacts/runs/offline-smoke-demo --dashboard-port 0
+```
+
+Then open the printed `Dashboard URL` in a browser. The page currently shows:
+
+- run-level summary counts and label totals
+- grouped metrics by SDK version and generation mode
+- a selectable task/version/mode drill-down list
+- saved prompt text, generated code, execution stdout/stderr, exception evidence, and classification metadata for the selected record
+
 Each execution artifact captures:
 
 - runtime selection (`qiskit-<version>`)
@@ -143,6 +167,7 @@ Current limitations for this slice:
 
 - Runtime selection is fixture-backed and deterministic for offline testing; it does not yet create or manage real version-pinned Qiskit virtual environments.
 - The harness currently executes one candidate at a time via local subprocesses; parallel scheduling and sandboxing policy controls remain out of scope for this milestone.
+
 #### MVP taxonomy
 
 The current offline taxonomy is intentionally narrow and deterministic. The ordered labels are:
