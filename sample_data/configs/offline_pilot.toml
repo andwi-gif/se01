@@ -1,0 +1,15 @@
+schema_version = "1.0"
+output_root = "artifacts/runs"
+
+[run]
+name = "offline-qiskit-pilot"
+sdk = "qiskit"
+versions = ["0.45", "1.0", "1.1"]
+modes = ["vanilla", "rag_docs", "rewrite"]
+max_tasks = 12
+notes = "Deterministic offline sample inputs for Milestone 2."
+
+[data]
+task_file = "sample_data/tasks/qiskit_pilot_tasks.json"
+docs_path = "sample_data/docs"
+model_response_file = "sample_data/model_responses/qiskit_saved_responses.json"

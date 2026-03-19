@@ -1,0 +1,281 @@
+{
+  "schema_version": "1.0",
+  "tasks": [
+    {
+      "task_id": "bell_state_sampler",
+      "title": "Bell state with Sampler",
+      "description": "Create a Bell state circuit and sample it with the primitive stack.",
+      "prompt": "Write Qiskit code that builds a 2-qubit Bell state circuit, measures all qubits, and executes it using the recommended Sampler primitive for the requested SDK version.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "primitives",
+        "entanglement"
+      ],
+      "expected_signals": {
+        "success_hint": "uses a Bell circuit and a primitives execution path"
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "family": "primitives"
+      }
+    },
+    {
+      "task_id": "basic_transpile_optimization",
+      "title": "Optimization-aware transpilation",
+      "description": "Transpile a simple circuit for a fake backend with a chosen optimization level.",
+      "prompt": "Write Qiskit code that creates a 3-qubit GHZ-style circuit and transpiles it for a fake backend at optimization level 2, printing the circuit depth after transpilation.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "transpile",
+        "backend"
+      ],
+      "expected_signals": {
+        "success_hint": "imports transpile and a fake backend"
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "family": "transpile"
+      }
+    },
+    {
+      "task_id": "parameter_binding_estimator",
+      "title": "Parameterized circuit with Estimator",
+      "description": "Evaluate a parameterized ansatz and observable with Estimator.",
+      "prompt": "Write Qiskit code that defines a one-parameter ansatz on one qubit, binds the parameter to pi/4, and estimates the expectation value of Z using the recommended Estimator primitive for the target version.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "primitives",
+        "parameters"
+      ],
+      "expected_signals": {
+        "success_hint": "uses Parameter and Estimator"
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "family": "primitives"
+      }
+    },
+    {
+      "task_id": "statevector_expectation",
+      "title": "Statevector expectation value",
+      "description": "Compute a Pauli expectation value from a statevector.",
+      "prompt": "Write Qiskit code that prepares a single-qubit |+> state and computes the expectation value of Pauli X using Statevector utilities, then prints the numeric result.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "quantum_info",
+        "statevector"
+      ],
+      "expected_signals": {
+        "success_hint": "uses Statevector and Pauli/X operator APIs"
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "family": "quantum_info"
+      }
+    },
+    {
+      "task_id": "two_local_ansatz",
+      "title": "TwoLocal ansatz construction",
+      "description": "Build a compact variational ansatz with a standard library circuit class.",
+      "prompt": "Write Qiskit code that constructs a 3-qubit TwoLocal ansatz with ry rotations and cz entanglement and prints the number of parameters.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "circuit_library",
+        "variational"
+      ],
+      "expected_signals": {
+        "success_hint": "imports TwoLocal from the circuit library"
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "family": "circuit_library"
+      }
+    },
+    {
+      "task_id": "sparse_pauli_op_grouping",
+      "title": "SparsePauliOp observable grouping",
+      "description": "Create a multi-term observable with SparsePauliOp.",
+      "prompt": "Write Qiskit code that constructs a SparsePauliOp for the terms ZI and IZ with coefficients 0.5 and 0.5, then prints the operator.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "quantum_info",
+        "observables"
+      ],
+      "expected_signals": {
+        "success_hint": "uses SparsePauliOp.from_list or equivalent"
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "family": "quantum_info"
+      }
+    },
+    {
+      "task_id": "measure_active_only",
+      "title": "Measure active qubits",
+      "description": "Create a circuit with idle qubits and measure only active ones when requested.",
+      "prompt": "Write Qiskit code that creates a 3-qubit circuit, applies operations only on qubits 0 and 2, then measures only the active qubits into a matching classical register.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "measurements",
+        "circuit"
+      ],
+      "expected_signals": {
+        "success_hint": "uses explicit classical registers or measure instructions"
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "family": "circuit"
+      }
+    },
+    {
+      "task_id": "pass_manager_preset",
+      "title": "Preset pass manager",
+      "description": "Use a generated preset pass manager for a simple circuit.",
+      "prompt": "Write Qiskit code that creates a simple 2-qubit circuit and runs it through a preset pass manager for optimization level 1, then prints the transformed circuit depth.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "transpile",
+        "pass_manager"
+      ],
+      "expected_signals": {
+        "success_hint": "uses generate_preset_pass_manager or the current equivalent"
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "family": "transpile"
+      }
+    },
+    {
+      "task_id": "circuit_draw_mpl",
+      "title": "Text circuit drawing",
+      "description": "Render a small circuit without requiring GUI support.",
+      "prompt": "Write Qiskit code that creates a 2-qubit circuit with an H and CX gate and prints a text diagram of the circuit so the example remains offline-friendly.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "visualization",
+        "circuit"
+      ],
+      "expected_signals": {
+        "success_hint": "uses circuit.draw with text output or prints the circuit directly"
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "family": "visualization"
+      }
+    },
+    {
+      "task_id": "if_test_control_flow",
+      "title": "Simple control-flow branch",
+      "description": "Build a small circuit using if_test style control flow.",
+      "prompt": "Write Qiskit code that measures one qubit and conditionally applies an X gate to a second qubit using the current structured control-flow API such as if_test.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "control_flow",
+        "circuit"
+      ],
+      "expected_signals": {
+        "success_hint": "uses a structured control-flow context manager"
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "family": "control_flow"
+      }
+    },
+    {
+      "task_id": "qasm_roundtrip",
+      "title": "QASM round-trip",
+      "description": "Export and re-import a simple circuit using supported QASM helpers.",
+      "prompt": "Write Qiskit code that creates a Bell circuit, exports it to an OpenQASM string using the version-appropriate helper, reconstructs the circuit from that string, and prints the resulting depth.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "qasm",
+        "interop"
+      ],
+      "expected_signals": {
+        "success_hint": "uses qasm2/qasm3 helpers or the current recommended import/export API"
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "family": "interop"
+      }
+    },
+    {
+      "task_id": "backend_sampler_result_counts",
+      "title": "BackendSampler result counts",
+      "description": "Sample a measured circuit and inspect quasi/count-style output.",
+      "prompt": "Write Qiskit code that builds a measured Bell circuit, runs it with BackendSampler or the current equivalent local primitive, and prints the returned quasi distribution or counts-like object.",
+      "sdk": "qiskit",
+      "target_versions": [
+        "0.45",
+        "1.0",
+        "1.1"
+      ],
+      "tags": [
+        "primitives",
+        "sampling"
+      ],
+      "expected_signals": {
+        "success_hint": "uses BackendSampler or the replacement primitive interface"
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "family": "primitives"
+      }
+    }
+  ]
+}

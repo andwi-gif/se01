@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "excerpts": [
+    {
+      "excerpt_id": "docs_045_sampler",
+      "sdk": "qiskit",
+      "version": "0.45",
+      "title": "Primitives in Qiskit 0.45",
+      "source_path": "qiskit/primitives",
+      "summary": "Primitives in Qiskit 0.45",
+      "content": "Qiskit 0.45 exposes reference primitives like Sampler and Estimator from qiskit.primitives. Examples commonly call sampler.run(circuits).result() and estimator.run(circuits, observables, parameter_values).",
+      "tags": [
+        "0.45",
+        "qiskit"
+      ]
+    },
+    {
+      "excerpt_id": "docs_045_backend",
+      "sdk": "qiskit",
+      "version": "0.45",
+      "title": "Fake backends and transpile",
+      "source_path": "qiskit/providers/fake_provider",
+      "summary": "Fake backends and transpile",
+      "content": "Qiskit 0.45 examples often import FakeManila or related fake backends from qiskit.providers.fake_provider. Transpilation examples combine transpile(circuit, backend=backend, optimization_level=2).",
+      "tags": [
+        "0.45",
+        "qiskit"
+      ]
+    },
+    {
+      "excerpt_id": "docs_045_qasm2",
+      "sdk": "qiskit",
+      "version": "0.45",
+      "title": "OpenQASM helpers",
+      "source_path": "qiskit/qasm2",
+      "summary": "OpenQASM helpers",
+      "content": "Qiskit 0.45 includes qasm2.dumps and qasm2.loads helpers for OpenQASM 2 round-trips. This is the recommended offline-friendly string export path in the sample corpus.",
+      "tags": [
+        "0.45",
+        "qiskit"
+      ]
+    },
+    {
+      "excerpt_id": "docs_045_pass_manager",
+      "sdk": "qiskit",
+      "version": "0.45",
+      "title": "Preset pass manager utilities",
+      "source_path": "qiskit/transpiler/preset_passmanagers",
+      "summary": "Preset pass manager utilities",
+      "content": "Preset pass managers can be created with generate_preset_pass_manager(optimization_level=1, backend=backend) and then used to run a circuit.",
+      "tags": [
+        "0.45",
+        "qiskit"
+      ]
+    }
+  ]
+}

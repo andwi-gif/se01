@@ -6,7 +6,13 @@ import argparse
 from collections.abc import Sequence
 from pathlib import Path
 
-from quantum_drift.config.paths import get_project_paths
+from quantum_drift.config import get_project_paths
+from quantum_drift.config.loader import load_run_config
+from quantum_drift.datasets import (
+    load_documentation_excerpt_directory,
+    load_model_response_fixtures,
+    load_tasks,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -26,6 +32,12 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Create the expected local directories if they do not already exist.",
     )
+    parser.add_argument(
+        "--validate-config",
+        type=Path,
+        default=None,
+        help="Load a TOML sample run config and validate the referenced offline assets.",
+    )
     return parser
 
 
@@ -43,6 +55,22 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(f"Configs: {project_paths.configs_dir}")
     print(f"Sample data: {project_paths.sample_data_dir}")
     print(f"Artifacts: {project_paths.artifacts_dir}")
+
+    if args.validate_config is not None:
+        config = load_run_config(args.validate_config)
+        tasks = load_tasks(project_paths.repo_root / config.data.task_file)
+        excerpts = load_documentation_excerpt_directory(
+            project_paths.repo_root / config.data.docs_path
+        )
+        fixtures = load_model_response_fixtures(
+            project_paths.repo_root / config.data.model_response_file,
+            task_ids={task.task_id for task in tasks},
+            excerpt_ids={excerpt.excerpt_id for excerpt in excerpts},
+        )
+        print(f"Validated config: {args.validate_config}")
+        print(f"Tasks loaded: {len(tasks)}")
+        print(f"Documentation excerpts loaded: {len(excerpts)}")
+        print(f"Model fixtures loaded: {len(fixtures)}")
     return 0
 
 
