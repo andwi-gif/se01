@@ -1,0 +1,8 @@
+run:
+  name: sample-pilot
+  sdk: qiskit
+  versions:
+    - "0.45"
+    - "1.0"
+  strategies:
+    - vanilla
