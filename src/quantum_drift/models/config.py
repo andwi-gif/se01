@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from quantum_drift.models.execution import ExecutionSettings
+
 
 @dataclass(frozen=True)
 class DataSelection:
@@ -48,6 +50,7 @@ class RunConfig:
     schema_version: str
     run: RunSettings
     data: DataSelection
+    execution: ExecutionSettings | None = None
     output_root: Path = field(default_factory=lambda: Path("artifacts/runs"))
 
     def __post_init__(self) -> None:

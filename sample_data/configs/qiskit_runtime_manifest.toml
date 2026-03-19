@@ -1,0 +1,14 @@
+schema_version = "1.0"
+sdk = "qiskit"
+
+[runtimes."0.45"]
+python_executable = "python"
+python_path = ["../runtime_fixtures/qiskit/0.45"]
+
+[runtimes."1.0"]
+python_executable = "python"
+python_path = ["../runtime_fixtures/qiskit/1.0"]
+
+[runtimes."1.1"]
+python_executable = "python"
+python_path = ["../runtime_fixtures/qiskit/1.1"]

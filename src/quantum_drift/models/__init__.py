@@ -1,11 +1,24 @@
 """Shared typed models for the quantum_drift package."""
 
 from quantum_drift.models.config import DataSelection, RunConfig, RunSettings
-from quantum_drift.models.generation import GENERATION_MODES, GenerationRequest, GenerationResult
+from quantum_drift.models.execution import (
+    ExecutionRequest,
+    ExecutionResult,
+    ExecutionSettings,
+    RuntimeSpec,
+)
+from quantum_drift.models.generation import (
+    GENERATION_MODES,
+    GenerationRequest,
+    GenerationResult,
+)
 from quantum_drift.models.tasks import DocumentationExcerpt, ModelResponseFixture, Task
 
 __all__ = [
     "GENERATION_MODES",
+    "ExecutionRequest",
+    "ExecutionResult",
+    "ExecutionSettings",
     "GenerationRequest",
     "GenerationResult",
     "DataSelection",
@@ -13,5 +26,6 @@ __all__ = [
     "ModelResponseFixture",
     "RunConfig",
     "RunSettings",
+    "RuntimeSpec",
     "Task",
 ]

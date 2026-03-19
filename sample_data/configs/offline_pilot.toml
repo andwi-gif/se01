@@ -13,3 +13,7 @@ notes = "Deterministic offline sample inputs for Milestone 2."
 task_file = "sample_data/tasks/qiskit_pilot_tasks.json"
 docs_path = "sample_data/docs"
 model_response_file = "sample_data/model_responses/qiskit_saved_responses.json"
+
+[execution]
+runtime_manifest = "sample_data/configs/qiskit_runtime_manifest.toml"
+timeout_seconds = 2.0
