@@ -149,6 +149,61 @@ def test_cli_can_execute_offline_generation(tmp_path: Path, capsys) -> None:
     assert (tmp_path / 'artifacts/runs/cli-execution-test/execution_results.json').exists()
 
 
+def test_cli_reports_missing_generation_artifacts_cleanly(tmp_path: Path, capsys) -> None:
+    task_file = (REPO_ROOT / 'sample_data/tasks/qiskit_pilot_tasks.json').as_posix()
+    docs_path = (REPO_ROOT / 'sample_data/docs').as_posix()
+    response_file = (
+        REPO_ROOT / 'sample_data/model_responses/qiskit_saved_responses.json'
+    ).as_posix()
+    runtime_manifest = (REPO_ROOT / 'sample_data/configs/qiskit_runtime_manifest.toml').as_posix()
+    config_path = tmp_path / 'offline_cli_missing_generation.toml'
+    config_path.write_text(
+        '\n'.join(
+            [
+                'schema_version = "1.0"',
+                'output_root = "artifacts/runs"',
+                '',
+                '[run]',
+                'name = "offline-cli-missing-generation"',
+                'sdk = "qiskit"',
+                'versions = ["1.0"]',
+                'modes = ["vanilla"]',
+                'max_tasks = 1',
+                '',
+                '[data]',
+                f'task_file = "{task_file}"',
+                f'docs_path = "{docs_path}"',
+                f'model_response_file = "{response_file}"',
+                '',
+                '[execution]',
+                f'runtime_manifest = "{runtime_manifest}"',
+                'timeout_seconds = 2.0',
+            ]
+        )
+        + '\n',
+        encoding='utf-8',
+    )
+
+    exit_code = main(
+        [
+            '--repo-root',
+            str(tmp_path),
+            '--execute-offline',
+            str(config_path),
+            '--run-id',
+            'missing-generation-run',
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 2
+    assert captured.err.strip().startswith(
+        'Error: offline execution could not find generation artifacts'
+    )
+    assert '--generate-offline first' in captured.err
+
+
 
 
 def test_cli_can_evaluate_offline_run(tmp_path: Path, capsys) -> None:
@@ -229,6 +284,75 @@ def test_cli_can_evaluate_offline_run(tmp_path: Path, capsys) -> None:
     assert 'Evaluated offline run: cli-eval-test' in captured.out
     assert 'Drift classifications: 4' in captured.out
     assert (tmp_path / 'artifacts/runs/cli-eval-test/run_summary.json').exists()
+
+
+def test_cli_reports_missing_execution_artifacts_cleanly(tmp_path: Path, capsys) -> None:
+    task_file = (REPO_ROOT / 'sample_data/tasks/qiskit_pilot_tasks.json').as_posix()
+    docs_path = (REPO_ROOT / 'sample_data/docs').as_posix()
+    response_file = (
+        REPO_ROOT / 'sample_data/model_responses/qiskit_saved_responses.json'
+    ).as_posix()
+    runtime_manifest = (REPO_ROOT / 'sample_data/configs/qiskit_runtime_manifest.toml').as_posix()
+    config_path = tmp_path / 'offline_cli_missing_execution.toml'
+    config_path.write_text(
+        '\n'.join(
+            [
+                'schema_version = "1.0"',
+                'output_root = "artifacts/runs"',
+                '',
+                '[run]',
+                'name = "offline-cli-missing-execution"',
+                'sdk = "qiskit"',
+                'versions = ["1.0"]',
+                'modes = ["vanilla"]',
+                'max_tasks = 1',
+                '',
+                '[data]',
+                f'task_file = "{task_file}"',
+                f'docs_path = "{docs_path}"',
+                f'model_response_file = "{response_file}"',
+                '',
+                '[execution]',
+                f'runtime_manifest = "{runtime_manifest}"',
+                'timeout_seconds = 2.0',
+            ]
+        )
+        + '\n',
+        encoding='utf-8',
+    )
+
+    assert (
+        main(
+            [
+                '--repo-root',
+                str(tmp_path),
+                '--generate-offline',
+                str(config_path),
+                '--run-id',
+                'missing-execution-run',
+            ]
+        )
+        == 0
+    )
+
+    exit_code = main(
+        [
+            '--repo-root',
+            str(tmp_path),
+            '--evaluate-offline',
+            str(config_path),
+            '--run-id',
+            'missing-execution-run',
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 2
+    assert captured.err.strip().startswith(
+        'Error: offline evaluation could not find execution artifacts'
+    )
+    assert '--execute-offline first' in captured.err
 
 
 def test_cli_can_print_saved_summary_from_run_directory(tmp_path: Path, capsys) -> None:

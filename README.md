@@ -2,9 +2,9 @@
 
 This repository is the planning and implementation space for a reproducible Python research artifact and demo app focused on measuring quantum API drift in LLM-generated code across SDK versions.
 
-## Current scaffold
+## Current implementation status
 
-The repository now includes the offline Qiskit MVP through the first usable slice of Milestone 7: checked-in sample inputs, deterministic generation, fixture-backed execution, drift taxonomy evaluation, aggregate metrics, CLI commands for the full offline sample workflow, and a minimal local dashboard for inspecting saved run artifacts.
+The repository now includes the offline Qiskit MVP through the Milestone 8 hardening scope: checked-in sample inputs, deterministic generation, fixture-backed execution, drift taxonomy evaluation, aggregate metrics, CLI commands for the full offline sample workflow, a minimal local dashboard for inspecting saved run artifacts, and CI coverage for Ruff, mypy, pytest, plus the checked-in offline smoke workflow.
 
 ### Repository layout
 
@@ -69,6 +69,8 @@ quantum-drift --summary-run readme-smoke
 ```
 
 Those five CLI commands are the same offline MVP path that CI now validates on every push and pull request, using only checked-in `sample_data/` assets and writing artifacts under `artifacts/runs/<run_id>/`.
+
+If one of the offline stages is missing its prerequisite artifacts, the CLI now exits with a short user-facing error instead of a Python traceback. For example, `--execute-offline` explains when `generation_results.json` is missing for the requested run id, and `--evaluate-offline` does the same for `execution_results.json`.
 
 ## Offline sample workflow
 
@@ -265,5 +267,5 @@ The evaluator uses first-match-wins rule ordering from `configs/qiskit_mvp_taxon
 ## Planning docs
 
 - `docs/ARCHITECTURE.md` outlines the intended single-package Python 3.11 architecture, end-to-end workflow, artifact layout, and core data models.
-- `docs/IMPLEMENTATION_PLAN.md` describes the phased MVP delivery plan, including the requirement that the sample workflow remains runnable from checked-in `sample_data/` assets without external API keys.
-- `docs/TASK_BREAKDOWN.md` defines the ordered PR-sized milestones and their done conditions.
+- `docs/IMPLEMENTATION_PLAN.md` describes the phased MVP delivery plan, including the requirement that the sample workflow remains runnable from checked-in `sample_data/` assets without external API keys. Its final hardening phase corresponds to the Milestone 8 documentation/CI polish now reflected in this README.
+- `docs/TASK_BREAKDOWN.md` defines the ordered PR-sized milestones and their done conditions, including the Milestone 8 hardening checklist for CI, documentation, and honest limitations.
