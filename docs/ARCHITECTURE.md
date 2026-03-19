@@ -217,37 +217,32 @@ The expected MVP workflow runs from deterministic local inputs through persisted
 
 ## Artifact storage layout under `artifacts/runs/`
 
-Each run should live in its own timestamped or hash-stable directory to make comparisons straightforward.
+The current MVP writes one directory per run under `artifacts/runs/<run_id>/`. The layout below reflects the checked-in offline workflow that the CLI and CI smoke path actually exercise today.
 
 ```text
 artifacts/
 └── runs/
     └── <run_id>/
-        ├── run_config.yaml
-        ├── manifest.json
-        ├── tasks.jsonl
-        ├── generations/
-        │   └── <task_id>__<mode>__<sdk_version>.json
-        ├── executions/
-        │   └── <task_id>__<mode>__<sdk_version>.json
-        ├── classifications/
-        │   └── <task_id>__<mode>__<sdk_version>.json
-        ├── summaries/
-        │   ├── run_summary.json
-        │   ├── metrics_by_dimension.json
-        │   └── drift_classifications.json
-        ├── logs/
-        │   ├── pipeline.log
-        │   └── environment.log
-        └── dashboard_cache/
-            └── derived_tables.parquet
+        ├── generation_results.json
+        ├── execution_results.json
+        ├── drift_classifications.json
+        ├── metrics_by_dimension.json
+        ├── run_summary.json
+        └── <task_id>/
+            └── <sdk_version>/
+                └── <mode>/
+                    ├── prompt.txt
+                    ├── generated_code.py
+                    ├── result.json
+                    ├── execution_result.json
+                    └── drift_classification.json
 ```
 
-Recommended conventions:
-- `run_id` should encode date/time plus a short config hash.
-- Raw per-attempt artifacts should be append-only.
-- `manifest.json` should list schema versions and file locations.
-- Summaries should be quick to load, while detailed artifacts preserve full traceability.
+Current conventions:
+- `run_id` comes from the run config name unless the CLI overrides it with `--run-id`.
+- Run-level manifests (`generation_results.json`, `execution_results.json`, `drift_classifications.json`, `metrics_by_dimension.json`, and `run_summary.json`) are the stable entry points for CLI summaries and dashboard loading.
+- Per-attempt leaf files keep prompt/code/evidence together under `<task_id>/<sdk_version>/<mode>/` for easy drill-down.
+- The MVP does not yet write a dedicated pipeline log, cached dashboard tables, or a copied run-config manifest into each run directory.
 
 ## Core data models
 
