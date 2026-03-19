@@ -51,7 +51,7 @@ The repository now includes the offline Qiskit MVP through the first usable slic
 
 1. Create a Python 3.11 virtual environment.
 2. Install the project with development dependencies.
-3. Run linting, typing, tests, and the offline sample validation command.
+3. Run linting, typing, tests, and the checked-in offline smoke workflow.
 
 ```bash
 python3.11 -m venv .venv
@@ -67,6 +67,8 @@ quantum-drift --execute-offline sample_data/configs/offline_smoke.toml --run-id 
 quantum-drift --evaluate-offline sample_data/configs/offline_smoke.toml --run-id readme-smoke
 quantum-drift --summary-run readme-smoke
 ```
+
+Those five CLI commands are the same offline MVP path that CI now validates on every push and pull request, using only checked-in `sample_data/` assets and writing artifacts under `artifacts/runs/<run_id>/`.
 
 ## Offline sample workflow
 
@@ -107,10 +109,28 @@ Milestone 5 turns persisted execution outcomes into per-attempt drift labels and
 Run the small smoke workflow end to end:
 
 ```bash
+quantum-drift --validate-config sample_data/configs/offline_smoke.toml
 quantum-drift --generate-offline sample_data/configs/offline_smoke.toml --run-id offline-smoke-demo
 quantum-drift --execute-offline sample_data/configs/offline_smoke.toml --run-id offline-smoke-demo
 quantum-drift --evaluate-offline sample_data/configs/offline_smoke.toml --run-id offline-smoke-demo
+quantum-drift --summary-run offline-smoke-demo
 ```
+
+This sequence is intentionally reproducible:
+
+- `sample_data/configs/offline_smoke.toml` limits the run to one SDK version (`1.0`), two generation modes (`vanilla` and `rag_docs`), and three checked-in pilot tasks.
+- Generation uses only `sample_data/model_responses/qiskit_saved_responses.json`; no API key or hosted model call is required.
+- Execution uses the checked-in runtime fixture manifest and local stub packages, so the smoke run does not depend on a system Qiskit installation.
+- Evaluation reads the saved execution evidence and applies the checked-in taxonomy rules without recomputing generations.
+- The summary command proves that a completed run can be inspected from persisted artifacts alone.
+
+For a successful smoke run, expect the following run-level artifacts under `artifacts/runs/offline-smoke-demo/`:
+
+- `generation_results.json`
+- `execution_results.json`
+- `drift_classifications.json`
+- `metrics_by_dimension.json`
+- `run_summary.json`
 
 The generation step writes:
 
@@ -149,6 +169,25 @@ The summary output prints:
 - generation modes
 - drift label counts
 - aggregate metrics grouped by saved dimension values
+
+### CI reproducibility contract
+
+The GitHub Actions workflow in `.github/workflows/ci.yml` now enforces the Milestone 8 offline MVP contract by running:
+
+- `ruff check .`
+- `mypy src`
+- `pytest`
+- the full checked-in offline smoke workflow:
+  - `quantum-drift --validate-config sample_data/configs/offline_smoke.toml`
+  - `quantum-drift --generate-offline sample_data/configs/offline_smoke.toml --run-id <ci-run-id>`
+  - `quantum-drift --execute-offline sample_data/configs/offline_smoke.toml --run-id <ci-run-id>`
+  - `quantum-drift --evaluate-offline sample_data/configs/offline_smoke.toml --run-id <ci-run-id>`
+  - `quantum-drift --summary-run <ci-run-id>`
+
+After the CLI steps finish, CI also checks that the expected run directory exists and that the smoke run produced both:
+
+- run-level manifests (`generation_results.json`, `execution_results.json`, `drift_classifications.json`, `metrics_by_dimension.json`, and `run_summary.json`)
+- per-attempt leaf artifacts for at least one generated candidate (`prompt.txt`, `generated_code.py`, `result.json`, `execution_result.json`, and `drift_classification.json`)
 
 ### Local dashboard
 
@@ -220,6 +259,8 @@ The evaluator uses first-match-wins rule ordering from `configs/qiskit_mvp_taxon
 - The only required backend is the checked-in saved-response backend; no live model or API-key flow is included yet.
 - `rag_docs` uses deterministic local excerpt selection from `sample_data/docs/`; it does not yet implement embeddings or semantic search.
 - `rewrite` remains a minimal baseline path and is not yet wired to iterative failure recovery logic.
+- CI proves the checked-in offline smoke path only; the larger `offline_pilot.toml` configuration remains a local/manual run because it is intentionally broader and slower than the required smoke gate.
+- The smoke run uses fixture-backed runtime packages instead of real version-pinned Qiskit installations, which keeps the MVP deterministic but means CI is validating the offline harness contract rather than upstream wheel compatibility.
 
 ## Planning docs
 
