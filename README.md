@@ -63,6 +63,7 @@ mypy src
 pytest
 quantum-drift --validate-config sample_data/configs/offline_smoke.toml
 quantum-drift --generate-offline sample_data/configs/offline_smoke.toml --run-id readme-smoke
+quantum-drift --execute-offline sample_data/configs/offline_smoke.toml --run-id readme-smoke
 ```
 
 ## Offline sample workflow
@@ -90,6 +91,37 @@ The command loads the TOML run config, task dataset, all versioned documentation
 ### Offline generation slice
 
 Milestone 3 now includes a deterministic offline generation slice for the Qiskit MVP. The pipeline loads the checked-in tasks, docs, and saved-response fixtures; constructs prompts for `vanilla`, `rag_docs`, and `rewrite`; and writes structured generation artifacts under `artifacts/runs/<run_id>/`.
+### Offline execution slice
+
+Milestone 4 adds a subprocess-based offline execution harness for generated candidates. Execution reads persisted `generation_results.json`, resolves a per-version runtime from `sample_data/configs/qiskit_runtime_manifest.toml`, injects deterministic local Qiskit stub packages from `sample_data/runtime_fixtures/`, and writes structured execution artifacts under the same run directory. This keeps the MVP fully offline and testable even when real Qiskit environments are not installed.
+
+Run the smoke workflow end to end:
+
+```bash
+quantum-drift --generate-offline sample_data/configs/offline_smoke.toml --run-id offline-smoke-demo
+quantum-drift --execute-offline sample_data/configs/offline_smoke.toml --run-id offline-smoke-demo
+```
+
+This execution step writes:
+
+- `artifacts/runs/offline-smoke-demo/execution_results.json`: manifest of all execution outcomes for the run.
+- `artifacts/runs/offline-smoke-demo/<task_id>/<sdk_version>/<mode>/execution_result.json`: the structured `ExecutionResult` artifact for a single generated candidate.
+
+Each execution artifact captures:
+
+- runtime selection (`qiskit-<version>`)
+- stdout and stderr
+- process exit code
+- timeout status
+- parsed exception type/message when Python code fails
+- wall-clock duration in seconds
+
+Current limitations for this slice:
+
+- Runtime selection is fixture-backed and deterministic for offline testing; it does not yet create or manage real version-pinned Qiskit virtual environments.
+- The harness currently executes one candidate at a time via local subprocesses; parallel scheduling and sandboxing policy controls remain out of scope for this milestone.
+- Metrics, drift taxonomy, summaries, and dashboard views still belong to later milestones.
+
 
 Run the small smoke workflow locally with checked-in sample data only:
 

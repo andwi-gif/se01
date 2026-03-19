@@ -13,6 +13,11 @@ from quantum_drift.datasets import (
     load_model_response_fixtures,
     load_tasks,
 )
+from quantum_drift.execution import (
+    load_execution_inputs,
+    load_runtime_manifest,
+    run_execution_pipeline,
+)
 from quantum_drift.generation import load_generation_inputs, run_generation_pipeline
 
 
@@ -46,10 +51,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="Run the deterministic offline generation slice for a TOML config.",
     )
     parser.add_argument(
+        "--execute-offline",
+        type=Path,
+        default=None,
+        help="Execute persisted offline generation artifacts for a TOML config.",
+    )
+    parser.add_argument(
         "--run-id",
         type=str,
         default=None,
-        help="Override the run identifier used for generation artifacts.",
+        help="Override the run identifier used for generation and execution artifacts.",
     )
     return parser
 
@@ -84,6 +95,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"Tasks loaded: {len(tasks)}")
         print(f"Documentation excerpts loaded: {len(excerpts)}")
         print(f"Model fixtures loaded: {len(fixtures)}")
+        if config.execution is not None:
+            runtime_manifest = load_runtime_manifest(
+                project_paths.repo_root / config.execution.runtime_manifest,
+                repo_root=project_paths.repo_root,
+            )
+            print(f"Runtime versions loaded: {len(runtime_manifest.runtimes)}")
 
     if args.generate_offline is not None:
         loaded = load_generation_inputs(args.generate_offline, repo_root=project_paths.repo_root)
@@ -95,6 +112,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"Generated offline run: {generation_run.run_id}")
         print(f"Generation results: {len(generation_run.results)}")
         print(f"Artifacts written to: {generation_run.output_dir}")
+
+    if args.execute_offline is not None:
+        loaded_execution = load_execution_inputs(
+            args.execute_offline,
+            repo_root=project_paths.repo_root,
+            run_id=args.run_id,
+        )
+        execution_run = run_execution_pipeline(loaded_execution)
+        print(f"Executed offline run: {execution_run.run_id}")
+        print(f"Execution results: {len(execution_run.results)}")
+        print(f"Artifacts written to: {execution_run.output_dir}")
     return 0
 
 

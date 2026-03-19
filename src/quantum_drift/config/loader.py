@@ -6,7 +6,7 @@ import tomllib
 from pathlib import Path
 from typing import Any
 
-from quantum_drift.models import DataSelection, RunConfig, RunSettings
+from quantum_drift.models import DataSelection, ExecutionSettings, RunConfig, RunSettings
 
 
 def _coerce_path(path_str: str) -> Path:
@@ -20,6 +20,14 @@ def load_run_config(path: Path) -> RunConfig:
 
     run_payload = payload["run"]
     data_payload = payload["data"]
+    execution_payload = payload.get("execution")
+    execution = None
+    if execution_payload is not None:
+        execution = ExecutionSettings(
+            runtime_manifest=_coerce_path(execution_payload["runtime_manifest"]),
+            timeout_seconds=float(execution_payload.get("timeout_seconds", 5.0)),
+        )
+
     return RunConfig(
         schema_version=payload["schema_version"],
         run=RunSettings(
@@ -35,5 +43,6 @@ def load_run_config(path: Path) -> RunConfig:
             docs_path=_coerce_path(data_payload["docs_path"]),
             model_response_file=_coerce_path(data_payload["model_response_file"]),
         ),
+        execution=execution,
         output_root=_coerce_path(payload.get("output_root", "artifacts/runs")),
     )
