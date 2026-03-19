@@ -1,6 +1,7 @@
 """Shared typed models for the quantum_drift package."""
 
 from quantum_drift.models.config import DataSelection, RunConfig, RunSettings
+from quantum_drift.models.evaluation import AggregateMetric, DriftClassification, RunSummary
 from quantum_drift.models.execution import (
     ExecutionRequest,
     ExecutionResult,
@@ -16,6 +17,8 @@ from quantum_drift.models.tasks import DocumentationExcerpt, ModelResponseFixtur
 
 __all__ = [
     "GENERATION_MODES",
+    "AggregateMetric",
+    "DriftClassification",
     "ExecutionRequest",
     "ExecutionResult",
     "ExecutionSettings",
@@ -25,6 +28,7 @@ __all__ = [
     "DocumentationExcerpt",
     "ModelResponseFixture",
     "RunConfig",
+    "RunSummary",
     "RunSettings",
     "RuntimeSpec",
     "Task",

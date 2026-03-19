@@ -146,3 +146,85 @@ def test_cli_can_execute_offline_generation(tmp_path: Path, capsys) -> None:
     assert 'Executed offline run: cli-execution-test' in captured.out
     assert 'Execution results: 4' in captured.out
     assert (tmp_path / 'artifacts/runs/cli-execution-test/execution_results.json').exists()
+
+
+
+
+def test_cli_can_evaluate_offline_run(tmp_path: Path, capsys) -> None:
+    task_file = (REPO_ROOT / 'sample_data/tasks/qiskit_pilot_tasks.json').as_posix()
+    docs_path = (REPO_ROOT / 'sample_data/docs').as_posix()
+    response_file = (
+        REPO_ROOT / 'sample_data/model_responses/qiskit_saved_responses.json'
+    ).as_posix()
+    runtime_manifest = (REPO_ROOT / 'sample_data/configs/qiskit_runtime_manifest.toml').as_posix()
+    config_path = tmp_path / 'offline_cli_evaluation.toml'
+    config_path.write_text(
+        '\n'.join(
+            [
+                'schema_version = "1.0"',
+                'output_root = "artifacts/runs"',
+                '',
+                '[run]',
+                'name = "offline-cli-eval"',
+                'sdk = "qiskit"',
+                'versions = ["1.0"]',
+                'modes = ["vanilla", "rag_docs"]',
+                'max_tasks = 2',
+                '',
+                '[data]',
+                f'task_file = "{task_file}"',
+                f'docs_path = "{docs_path}"',
+                f'model_response_file = "{response_file}"',
+                '',
+                '[execution]',
+                f'runtime_manifest = "{runtime_manifest}"',
+                'timeout_seconds = 2.0',
+            ]
+        )
+        + '\n',
+        encoding='utf-8',
+    )
+
+    assert (
+        main(
+            [
+                '--repo-root',
+                str(tmp_path),
+                '--generate-offline',
+                str(config_path),
+                '--run-id',
+                'cli-eval-test',
+            ]
+        )
+        == 0
+    )
+    assert (
+        main(
+            [
+                '--repo-root',
+                str(tmp_path),
+                '--execute-offline',
+                str(config_path),
+                '--run-id',
+                'cli-eval-test',
+            ]
+        )
+        == 0
+    )
+    evaluation_exit_code = main(
+        [
+            '--repo-root',
+            str(tmp_path),
+            '--evaluate-offline',
+            str(config_path),
+            '--run-id',
+            'cli-eval-test',
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert evaluation_exit_code == 0
+    assert 'Evaluated offline run: cli-eval-test' in captured.out
+    assert 'Drift classifications: 4' in captured.out
+    assert (tmp_path / 'artifacts/runs/cli-eval-test/run_summary.json').exists()
