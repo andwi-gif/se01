@@ -65,6 +65,7 @@ quantum-drift --validate-config sample_data/configs/offline_smoke.toml
 quantum-drift --generate-offline sample_data/configs/offline_smoke.toml --run-id readme-smoke
 quantum-drift --execute-offline sample_data/configs/offline_smoke.toml --run-id readme-smoke
 quantum-drift --evaluate-offline sample_data/configs/offline_smoke.toml --run-id readme-smoke
+quantum-drift --summary-run readme-smoke
 ```
 
 ## Offline sample workflow
@@ -129,6 +130,25 @@ The evaluation step writes:
 - `artifacts/runs/offline-smoke-demo/metrics_by_dimension.json`: aggregate metric rows by `sdk_version` and `mode`.
 - `artifacts/runs/offline-smoke-demo/run_summary.json`: top-level `RunSummary` artifact for the completed run.
 - `artifacts/runs/offline-smoke-demo/<task_id>/<sdk_version>/<mode>/drift_classification.json`: the per-attempt drift label saved beside the execution artifact.
+
+### Offline summary command
+
+Milestone 6 also requires a dedicated summary command that reads the saved evaluation artifacts without rerunning generation, execution, or evaluation. Use `--summary-run` with either a run id under `artifacts/runs/` or an explicit run directory path:
+
+```bash
+quantum-drift --summary-run offline-smoke-demo
+quantum-drift --summary-run artifacts/runs/offline-smoke-demo
+```
+
+The summary output prints:
+
+- run id
+- task count
+- attempt count
+- SDK versions
+- generation modes
+- drift label counts
+- aggregate metrics grouped by saved dimension values
 
 ### Local dashboard
 
