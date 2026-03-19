@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "excerpts": [
+    {
+      "excerpt_id": "docs_11_estimator",
+      "sdk": "qiskit",
+      "version": "1.1",
+      "title": "Qiskit 1.1 primitive guidance",
+      "source_path": "qiskit/primitives",
+      "summary": "Qiskit 1.1 primitive guidance",
+      "content": "Qiskit 1.1 docs continue to center primitive-based execution and observable evaluation. Versioned examples keep Sampler and Estimator usage explicit so retrieval can ground prompts in the target release.",
+      "tags": [
+        "1.1",
+        "qiskit"
+      ]
+    },
+    {
+      "excerpt_id": "docs_11_sparse_pauli",
+      "sdk": "qiskit",
+      "version": "1.1",
+      "title": "SparsePauliOp examples",
+      "source_path": "qiskit/quantum_info",
+      "summary": "SparsePauliOp examples",
+      "content": "Qiskit 1.1 quantum_info docs show SparsePauliOp.from_list as the standard compact way to define observables such as [(\"ZI\", 0.5), (\"IZ\", 0.5)].",
+      "tags": [
+        "1.1",
+        "qiskit"
+      ]
+    },
+    {
+      "excerpt_id": "docs_11_twolocal",
+      "sdk": "qiskit",
+      "version": "1.1",
+      "title": "Circuit library ansatz classes",
+      "source_path": "qiskit/circuit/library",
+      "summary": "Circuit library ansatz classes",
+      "content": "Qiskit 1.1 circuit library examples still highlight TwoLocal for compact ansatz construction and expose its parameter count via num_parameters.",
+      "tags": [
+        "1.1",
+        "qiskit"
+      ]
+    },
+    {
+      "excerpt_id": "docs_11_draw",
+      "sdk": "qiskit",
+      "version": "1.1",
+      "title": "Offline-safe text circuit drawing",
+      "source_path": "qiskit/visualization",
+      "summary": "Offline-safe text circuit drawing",
+      "content": "Offline examples should use circuit.draw(output=\"text\") or print(circuit) when rendering diagrams in environments without GUI support.",
+      "tags": [
+        "1.1",
+        "qiskit"
+      ]
+    }
+  ]
+}
