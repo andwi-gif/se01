@@ -6,6 +6,11 @@ import argparse
 from collections.abc import Sequence
 from pathlib import Path
 
+from quantum_drift.cli.summary import (
+    format_run_summary,
+    load_persisted_run_summary,
+    resolve_run_directory,
+)
 from quantum_drift.config import get_project_paths
 from quantum_drift.config.loader import load_run_config
 from quantum_drift.datasets import (
@@ -75,6 +80,15 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=None,
         help="Launch a local dashboard for an existing artifacts/runs/<run_id> directory.",
+    )
+    parser.add_argument(
+        "--summary-run",
+        type=str,
+        default=None,
+        help=(
+            "Print a readable summary for an existing completed run, using either "
+            "artifacts/runs/<run_id> or an explicit run directory path."
+        ),
     )
     parser.add_argument(
         "--dashboard-host",
@@ -161,6 +175,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"Drift classifications: {len(evaluation_run.summary.classifications)}")
         print(f"Metric rows: {len(evaluation_run.summary.metrics)}")
         print(f"Artifacts written to: {evaluation_run.output_dir}")
+
+    if args.summary_run is not None:
+        summary_run_dir = resolve_run_directory(args.summary_run, repo_root=project_paths.repo_root)
+        persisted_summary = load_persisted_run_summary(summary_run_dir)
+        print(format_run_summary(persisted_summary))
 
     if args.dashboard_run is not None:
         server, url = create_dashboard_server(
