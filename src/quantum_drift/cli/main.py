@@ -20,6 +20,7 @@ from quantum_drift.execution import (
     run_execution_pipeline,
 )
 from quantum_drift.generation import load_generation_inputs, run_generation_pipeline
+from quantum_drift.ui import create_dashboard_server
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -68,6 +69,24 @@ def build_parser() -> argparse.ArgumentParser:
         type=str,
         default=None,
         help="Override the run identifier used for generation and execution artifacts.",
+    )
+    parser.add_argument(
+        "--dashboard-run",
+        type=Path,
+        default=None,
+        help="Launch a local dashboard for an existing artifacts/runs/<run_id> directory.",
+    )
+    parser.add_argument(
+        "--dashboard-host",
+        type=str,
+        default="127.0.0.1",
+        help="Host interface for the local dashboard server.",
+    )
+    parser.add_argument(
+        "--dashboard-port",
+        type=int,
+        default=8000,
+        help="Port for the local dashboard server; use 0 to auto-select.",
     )
     return parser
 
@@ -142,6 +161,22 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"Drift classifications: {len(evaluation_run.summary.classifications)}")
         print(f"Metric rows: {len(evaluation_run.summary.metrics)}")
         print(f"Artifacts written to: {evaluation_run.output_dir}")
+
+    if args.dashboard_run is not None:
+        server, url = create_dashboard_server(
+            args.dashboard_run,
+            host=args.dashboard_host,
+            port=args.dashboard_port,
+        )
+        print(f"Dashboard run: {args.dashboard_run}")
+        print(f"Dashboard URL: {url}")
+        print("Press Ctrl+C to stop the dashboard server.")
+        try:
+            server.serve_forever()
+        except KeyboardInterrupt:
+            print("Dashboard server stopped.")
+        finally:
+            server.server_close()
     return 0
 
 
