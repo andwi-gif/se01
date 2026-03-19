@@ -1,0 +1,7 @@
+project:
+  name: quantum-drift
+  offline_mode: true
+run:
+  artifact_root: artifacts/runs
+  sample_data_root: sample_data
+  strategy: vanilla
