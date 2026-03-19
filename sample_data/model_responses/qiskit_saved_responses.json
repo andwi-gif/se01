@@ -1,0 +1,533 @@
+{
+  "schema_version": "1.0",
+  "fixtures": [
+    {
+      "fixture_id": "bell_state_sampler__vanilla__any",
+      "task_id": "bell_state_sampler",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for bell_state_sampler in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for bell_state_sampler\nprint(\"bell_state_sampler:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "bell_state_sampler__rag_docs__any",
+      "task_id": "bell_state_sampler",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for bell_state_sampler in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for bell_state_sampler\nprint(\"bell_state_sampler:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_045_backend"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "bell_state_sampler__rewrite__any",
+      "task_id": "bell_state_sampler",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for bell_state_sampler in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for bell_state_sampler\nprint(\"bell_state_sampler:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "basic_transpile_optimization__vanilla__any",
+      "task_id": "basic_transpile_optimization",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for basic_transpile_optimization in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for basic_transpile_optimization\nprint(\"basic_transpile_optimization:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "basic_transpile_optimization__rag_docs__any",
+      "task_id": "basic_transpile_optimization",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for basic_transpile_optimization in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for basic_transpile_optimization\nprint(\"basic_transpile_optimization:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_10_sampler"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "basic_transpile_optimization__rewrite__any",
+      "task_id": "basic_transpile_optimization",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for basic_transpile_optimization in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for basic_transpile_optimization\nprint(\"basic_transpile_optimization:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "parameter_binding_estimator__vanilla__any",
+      "task_id": "parameter_binding_estimator",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for parameter_binding_estimator in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for parameter_binding_estimator\nprint(\"parameter_binding_estimator:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "parameter_binding_estimator__rag_docs__any",
+      "task_id": "parameter_binding_estimator",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for parameter_binding_estimator in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for parameter_binding_estimator\nprint(\"parameter_binding_estimator:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_10_qasm"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "parameter_binding_estimator__rewrite__any",
+      "task_id": "parameter_binding_estimator",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for parameter_binding_estimator in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for parameter_binding_estimator\nprint(\"parameter_binding_estimator:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "statevector_expectation__vanilla__any",
+      "task_id": "statevector_expectation",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for statevector_expectation in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for statevector_expectation\nprint(\"statevector_expectation:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "statevector_expectation__rag_docs__any",
+      "task_id": "statevector_expectation",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for statevector_expectation in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for statevector_expectation\nprint(\"statevector_expectation:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_11_twolocal"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "statevector_expectation__rewrite__any",
+      "task_id": "statevector_expectation",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for statevector_expectation in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for statevector_expectation\nprint(\"statevector_expectation:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "two_local_ansatz__vanilla__any",
+      "task_id": "two_local_ansatz",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for two_local_ansatz in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for two_local_ansatz\nprint(\"two_local_ansatz:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "two_local_ansatz__rag_docs__any",
+      "task_id": "two_local_ansatz",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for two_local_ansatz in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for two_local_ansatz\nprint(\"two_local_ansatz:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_045_backend"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "two_local_ansatz__rewrite__any",
+      "task_id": "two_local_ansatz",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for two_local_ansatz in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for two_local_ansatz\nprint(\"two_local_ansatz:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "sparse_pauli_op_grouping__vanilla__any",
+      "task_id": "sparse_pauli_op_grouping",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for sparse_pauli_op_grouping in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for sparse_pauli_op_grouping\nprint(\"sparse_pauli_op_grouping:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "sparse_pauli_op_grouping__rag_docs__any",
+      "task_id": "sparse_pauli_op_grouping",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for sparse_pauli_op_grouping in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for sparse_pauli_op_grouping\nprint(\"sparse_pauli_op_grouping:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_10_sampler"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "sparse_pauli_op_grouping__rewrite__any",
+      "task_id": "sparse_pauli_op_grouping",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for sparse_pauli_op_grouping in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for sparse_pauli_op_grouping\nprint(\"sparse_pauli_op_grouping:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "measure_active_only__vanilla__any",
+      "task_id": "measure_active_only",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for measure_active_only in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for measure_active_only\nprint(\"measure_active_only:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "measure_active_only__rag_docs__any",
+      "task_id": "measure_active_only",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for measure_active_only in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for measure_active_only\nprint(\"measure_active_only:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_10_qasm"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "measure_active_only__rewrite__any",
+      "task_id": "measure_active_only",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for measure_active_only in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for measure_active_only\nprint(\"measure_active_only:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "pass_manager_preset__vanilla__any",
+      "task_id": "pass_manager_preset",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for pass_manager_preset in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for pass_manager_preset\nprint(\"pass_manager_preset:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "pass_manager_preset__rag_docs__any",
+      "task_id": "pass_manager_preset",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for pass_manager_preset in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for pass_manager_preset\nprint(\"pass_manager_preset:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_11_twolocal"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "pass_manager_preset__rewrite__any",
+      "task_id": "pass_manager_preset",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for pass_manager_preset in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for pass_manager_preset\nprint(\"pass_manager_preset:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "circuit_draw_mpl__vanilla__any",
+      "task_id": "circuit_draw_mpl",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for circuit_draw_mpl in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for circuit_draw_mpl\nprint(\"circuit_draw_mpl:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "circuit_draw_mpl__rag_docs__any",
+      "task_id": "circuit_draw_mpl",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for circuit_draw_mpl in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for circuit_draw_mpl\nprint(\"circuit_draw_mpl:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_045_backend"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "circuit_draw_mpl__rewrite__any",
+      "task_id": "circuit_draw_mpl",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for circuit_draw_mpl in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for circuit_draw_mpl\nprint(\"circuit_draw_mpl:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "if_test_control_flow__vanilla__any",
+      "task_id": "if_test_control_flow",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for if_test_control_flow in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for if_test_control_flow\nprint(\"if_test_control_flow:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "if_test_control_flow__rag_docs__any",
+      "task_id": "if_test_control_flow",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for if_test_control_flow in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for if_test_control_flow\nprint(\"if_test_control_flow:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_10_sampler"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "if_test_control_flow__rewrite__any",
+      "task_id": "if_test_control_flow",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for if_test_control_flow in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for if_test_control_flow\nprint(\"if_test_control_flow:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "qasm_roundtrip__vanilla__any",
+      "task_id": "qasm_roundtrip",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for qasm_roundtrip in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for qasm_roundtrip\nprint(\"qasm_roundtrip:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "qasm_roundtrip__rag_docs__any",
+      "task_id": "qasm_roundtrip",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for qasm_roundtrip in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for qasm_roundtrip\nprint(\"qasm_roundtrip:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_10_qasm"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "qasm_roundtrip__rewrite__any",
+      "task_id": "qasm_roundtrip",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for qasm_roundtrip in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for qasm_roundtrip\nprint(\"qasm_roundtrip:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "backend_sampler_result_counts__vanilla__any",
+      "task_id": "backend_sampler_result_counts",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "vanilla",
+      "prompt_summary": "Offline saved response for backend_sampler_result_counts in vanilla mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# offline fixture for backend_sampler_result_counts\nprint(\"backend_sampler_result_counts:vanilla\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "backend_sampler_result_counts__rag_docs__any",
+      "task_id": "backend_sampler_result_counts",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rag_docs",
+      "prompt_summary": "Offline saved response for backend_sampler_result_counts in rag_docs mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# retrieved-docs fixture for backend_sampler_result_counts\nprint(\"backend_sampler_result_counts:rag_docs\")\n",
+      "retrieved_context_ids": [
+        "docs_11_twolocal"
+      ],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    },
+    {
+      "fixture_id": "backend_sampler_result_counts__rewrite__any",
+      "task_id": "backend_sampler_result_counts",
+      "sdk": "qiskit",
+      "sdk_version": "*",
+      "mode": "rewrite",
+      "prompt_summary": "Offline saved response for backend_sampler_result_counts in rewrite mode.",
+      "generated_code": "from qiskit import QuantumCircuit\n\n# rewritten fixture for backend_sampler_result_counts\nprint(\"backend_sampler_result_counts:rewrite\")\n",
+      "retrieved_context_ids": [],
+      "metadata": {
+        "deterministic": true,
+        "supports_offline_demo": true
+      }
+    }
+  ]
+}

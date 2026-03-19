@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "excerpts": [
+    {
+      "excerpt_id": "docs_10_sampler",
+      "sdk": "qiskit",
+      "version": "1.0",
+      "title": "Primitives in Qiskit 1.0",
+      "source_path": "qiskit/primitives",
+      "summary": "Primitives in Qiskit 1.0",
+      "content": "Qiskit 1.0 continues the primitives-first execution story and keeps version-aware examples around Sampler and Estimator interfaces. Migration notes emphasize checking result container shapes and imports during the 1.0 upgrade.",
+      "tags": [
+        "1.0",
+        "qiskit"
+      ]
+    },
+    {
+      "excerpt_id": "docs_10_backend",
+      "sdk": "qiskit",
+      "version": "1.0",
+      "title": "Provider migration reminders",
+      "source_path": "qiskit/providers",
+      "summary": "Provider migration reminders",
+      "content": "Qiskit 1.0 sample notes remind users that provider and fake backend imports may have moved compared with older releases. Transpile examples should follow the currently documented fake backend package path for the version under test.",
+      "tags": [
+        "1.0",
+        "qiskit"
+      ]
+    },
+    {
+      "excerpt_id": "docs_10_control",
+      "sdk": "qiskit",
+      "version": "1.0",
+      "title": "Structured control flow",
+      "source_path": "qiskit/circuit/controlflow",
+      "summary": "Structured control flow",
+      "content": "Qiskit 1.0 documentation recommends structured builders such as QuantumCircuit.if_test for control flow instead of legacy condition arguments on individual instructions.",
+      "tags": [
+        "1.0",
+        "qiskit"
+      ]
+    },
+    {
+      "excerpt_id": "docs_10_qasm",
+      "sdk": "qiskit",
+      "version": "1.0",
+      "title": "QASM import/export modules",
+      "source_path": "qiskit/qasm2",
+      "summary": "QASM import/export modules",
+      "content": "Qiskit 1.0 keeps module-based qasm2 and qasm3 helpers for string export and import. Sample tasks should prefer explicit helper modules over removed legacy instance methods.",
+      "tags": [
+        "1.0",
+        "qiskit"
+      ]
+    }
+  ]
+}
