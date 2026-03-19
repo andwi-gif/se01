@@ -13,6 +13,7 @@ from quantum_drift.datasets import (
     load_model_response_fixtures,
     load_tasks,
 )
+from quantum_drift.generation import load_generation_inputs, run_generation_pipeline
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -37,6 +38,18 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=None,
         help="Load a TOML sample run config and validate the referenced offline assets.",
+    )
+    parser.add_argument(
+        "--generate-offline",
+        type=Path,
+        default=None,
+        help="Run the deterministic offline generation slice for a TOML config.",
+    )
+    parser.add_argument(
+        "--run-id",
+        type=str,
+        default=None,
+        help="Override the run identifier used for generation artifacts.",
     )
     return parser
 
@@ -71,6 +84,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"Tasks loaded: {len(tasks)}")
         print(f"Documentation excerpts loaded: {len(excerpts)}")
         print(f"Model fixtures loaded: {len(fixtures)}")
+
+    if args.generate_offline is not None:
+        loaded = load_generation_inputs(args.generate_offline, repo_root=project_paths.repo_root)
+        generation_run = run_generation_pipeline(
+            loaded,
+            repo_root=project_paths.repo_root,
+            run_id=args.run_id,
+        )
+        print(f"Generated offline run: {generation_run.run_id}")
+        print(f"Generation results: {len(generation_run.results)}")
+        print(f"Artifacts written to: {generation_run.output_dir}")
     return 0
 
 
